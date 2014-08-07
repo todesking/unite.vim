@@ -517,7 +517,7 @@ function! s:get_files(context, files, level, max_unit) "{{{
         let child = substitute(child, '\/$', '', '')
         let child_index += 1
 
-        if child =~? '/\.\+$\|/\%(\.hg\|\.git\|\.bzr\|\.svn\)/'
+        if child =~? s:source_file_rec.ignore_pattern
           continue
         endif
 

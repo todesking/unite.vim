@@ -439,16 +439,10 @@ function! unite#init#_candidates_source(candidates, source_name) "{{{
         \ 'is_multiline' : 0,
         \ 'unite__is_marked' : 0,
         \ }
-
-  let candidates = []
-  for candidate in a:candidates
-    let candidate = extend(candidate, default_candidate, 'keep')
-    let candidate.source = a:source_name
-
-    call add(candidates, candidate)
-  endfor
-
-  return candidates
+  return map(
+    \ a:candidates,
+    \ 'extend(extend(v:val, default_candidate, "keep"), {"source": a:source_name})'
+    \ )
 endfunction"}}}
 
 function! unite#init#_default_scripts(kind, names) "{{{
